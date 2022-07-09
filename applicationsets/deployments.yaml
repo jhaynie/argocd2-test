@@ -10,7 +10,7 @@ spec:
               repoURL: https://github.com/jhaynie/argocd2-test.git
               revision: HEAD
               files:
-                - path: deployments/*.json
+                - path: deployments/**/config.json
           - list:
               elements:
                 - cluster: dev
