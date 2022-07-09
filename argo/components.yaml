@@ -8,15 +8,11 @@ metadata:
     - resources-finalizer.argocd.argoproj.io
 spec:
   description: The Platform components we use for all applications
-
-  # Allow manifests to deploy from any Git repos
   sourceRepos:
     - "*"
-
+  destinations:
+    - namespace: "*"
+      server: "*"
   clusterResourceWhitelist:
     - group: "*"
       kind: "*"
-
-  namespaceResourceBlacklist:
-    - group: ""
-      kind: ResourceQuota
