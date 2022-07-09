@@ -9,7 +9,7 @@ spec:
           - git:
               repoURL: https://github.com/jhaynie/argocd2-test.git
               revision: HEAD
-              files:
+              directories:
                 - path: apps/charts/*
           - list:
               elements:
