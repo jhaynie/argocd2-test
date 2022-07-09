@@ -24,6 +24,8 @@ spec:
         repoURL: https://github.com/jhaynie/argocd2-test.git
         targetRevision: HEAD
         path: "{{path}}"
+        chart: "{{path.basename}}"
+        helm:
       destination:
         server: "{{url}}"
         namespace: "default"
