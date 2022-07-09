@@ -25,7 +25,7 @@ spec:
         targetRevision: HEAD
         path: "{{deployment.path}}"
       destination:
-        server: "{{deployment.url}}"
+        server: "{{url}}"
         namespace: "{{deployment.namespace}}"
       syncPolicy:
         syncOptions:
