@@ -1,5 +1,7 @@
 {
-  "name": "helloworld-from-main",
-  "namespace": "main",
-  "file": "apps/helloworld.yaml"
+  "deployment": {
+    "name": "helloworld-from-main",
+    "namespace": "main",
+    "path": "apps/helloworld.yaml"
+  }
 }
