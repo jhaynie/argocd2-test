@@ -1,0 +1,7 @@
+{
+  "deployment": {
+    "name": "helloworld-guestbook",
+    "namespace": "default",
+    "path": "components/helm-guestbook/config"
+  }
+}
