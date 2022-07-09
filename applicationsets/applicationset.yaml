@@ -17,7 +17,7 @@ spec:
                   url: https://kubernetes.default.svc
   template:
     metadata:
-      name: "{{path[0]}}"
+      name: "{{path.basename}}"
     spec:
       project: default
       source:
