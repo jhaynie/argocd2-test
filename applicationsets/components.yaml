@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: apps
+  name: components
 spec:
   generators:
     - matrix:
@@ -10,7 +10,7 @@ spec:
               repoURL: https://github.com/jhaynie/argocd2-test.git
               revision: HEAD
               directories:
-                - path: apps/*
+                - path: components/*
           - list:
               elements:
                 - cluster: dev
@@ -19,7 +19,7 @@ spec:
     metadata:
       name: "{{path.basename}}"
     spec:
-      project: default
+      project: components
       source:
         repoURL: https://github.com/jhaynie/argocd2-test.git
         targetRevision: HEAD
