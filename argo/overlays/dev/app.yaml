@@ -6,4 +6,4 @@ metadata:
 spec:
   source:
     repoURL: https://github.com/jhaynie/argocd2-test.git
-    path: applicationsets/overlay/dev
+    path: applicationsets/overlays/dev
