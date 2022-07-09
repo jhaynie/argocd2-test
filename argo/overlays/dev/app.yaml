@@ -1,0 +1,9 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: argo
+  namespace: argocd
+spec:
+  source:
+    repoURL: https://github.com/jhaynie/argocd2-test.git
+    path: applicationsets/overlay/dev

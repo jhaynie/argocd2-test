@@ -1,27 +1,24 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: components
+  name: deployments
 spec:
   generators:
     - matrix:
         generators:
           - git:
-              repoURL: https://github.com/jhaynie/argocd2-test.git
               revision: HEAD
               files:
-                - path: components/**/config.json
+                - path: deployments/**/config.json
           - list:
               elements:
                 - cluster: dev
-                  url: https://kubernetes.default.svc
   template:
     metadata:
       name: "{{deployment.name}}"
     spec:
-      project: components
+      project: deployments
       source:
-        repoURL: https://github.com/jhaynie/argocd2-test.git
         targetRevision: HEAD
         path: "{{deployment.path}}"
       destination:
