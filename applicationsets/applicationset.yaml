@@ -26,6 +26,6 @@ spec:
         path: "{{path}}"
       destination:
         server: "{{url}}"
-        namespace: "{{path[0]}}"
+        namespace: "default"
       syncPolicy:
         automated: {}
