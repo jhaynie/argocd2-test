@@ -1,0 +1,7 @@
+{
+  "deployment": {
+    "name": "sbt-124",
+    "namespace": "sbt-124",
+    "path": "deployments/sbt-124/config"
+  }
+}
