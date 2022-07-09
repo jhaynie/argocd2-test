@@ -1,5 +1,5 @@
 {
   "name": "helloworld-from-main",
   "namespace": "main",
-  "path": "apps/helloworld.yaml"
+  "file": "apps/helloworld.yaml"
 }

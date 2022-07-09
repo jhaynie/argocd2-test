@@ -23,7 +23,7 @@ spec:
       source:
         repoURL: https://github.com/jhaynie/argocd2-test.git
         targetRevision: HEAD
-        path: "{{path}}"
+        path: "{{file}}"
       destination:
         server: "{{url}}"
         namespace: "{{namespace}}"
