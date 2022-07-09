@@ -1,7 +1,0 @@
-{
-  "deployment": {
-    "name": "abc-123",
-    "namespace": "abc-123",
-    "path": "deployments/abc-123/config"
-  }
-}
