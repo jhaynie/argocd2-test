@@ -19,7 +19,7 @@ spec:
     metadata:
       name: "{{path[0]}}"
     spec:
-      project: apps
+      project: default
       source:
         repoURL: https://github.com/jhaynie/argocd2-test.git
         targetRevision: HEAD
