@@ -7,9 +7,6 @@ spec:
     - matrix:
         generators:
           - git:
-              revision: HEAD
-              files:
-                - path: deployments/**/config.json
           - list:
               elements:
                 - cluster: dev
