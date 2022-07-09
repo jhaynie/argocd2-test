@@ -33,3 +33,9 @@ spec:
         automated:
           prune: true
           selfHeal: true
+        retry:
+          limit: 3
+          backoff:
+            duration: "2s"
+            factor: 2
+            maxDuration: "10m0s"
