@@ -1,0 +1,7 @@
+{
+  "deployment": {
+    "name": "redis",
+    "namespace": "redis",
+    "path": "components/rabbitmq/config"
+  }
+}

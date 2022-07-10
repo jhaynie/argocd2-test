@@ -21,6 +21,8 @@ spec:
       destination:
         server: "{{url}}"
         namespace: "{{deployment.namespace}}"
+      kustomize:
+        enableHelm: true
       syncPolicy:
         syncOptions:
           - CreateNamespace=true
