@@ -1,0 +1,7 @@
+{
+  "deployment": {
+    "name": "minio",
+    "namespace": "minio",
+    "path": "components/minio/dev"
+  }
+}
