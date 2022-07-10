@@ -1,0 +1,7 @@
+{
+  "deployment": {
+    "name": "etcd",
+    "namespace": "etcd",
+    "path": "components/etcd/dev"
+  }
+}

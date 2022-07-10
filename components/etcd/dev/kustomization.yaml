@@ -1,0 +1,16 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - ../base
+helmCharts:
+  - name: etcd
+    repo: https://charts.bitnami.com/bitnami
+    releaseName: etcd
+    namespace: etcd
+    valuesInline:
+      autoCompactionMode: periodic
+      replicaCount: 1
+      persistence:
+        enabled: flase
+      pdb:
+        create: false
