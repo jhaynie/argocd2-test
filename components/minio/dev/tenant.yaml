@@ -5,6 +5,11 @@ metadata:
   namespace: minio-tenant
 spec:
   ## Specification for MinIO Pool(s) in this Tenant.
+  exposeServices:
+    console: true
+    minio: true
+  users:
+    - name: minio-user-0
   pools:
     ## Servers specifies the number of MinIO Tenant Pods / Servers in this pool.
     ## For standalone mode, supply 1. For distributed mode, supply 4 or more.

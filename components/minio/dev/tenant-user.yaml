@@ -1,0 +1,11 @@
+apiVersion: v1
+data:
+  CONSOLE_ACCESS_KEY: bWluaW91c2Vy
+  CONSOLE_SECRET_KEY: bWluaW91c2Vy
+kind: Secret
+labels:
+  v1.min.io/tenant: minio
+metadata:
+  name: minio-user-0
+  namespace: minio
+type: Opaque
