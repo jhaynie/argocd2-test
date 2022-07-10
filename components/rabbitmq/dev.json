@@ -1,7 +1,7 @@
 {
   "deployment": {
     "name": "rabbitmq",
-    "namespace": "rabbitmq-system",
+    "namespace": "rabbitmq",
     "path": "components/rabbitmq/dev"
   }
 }
