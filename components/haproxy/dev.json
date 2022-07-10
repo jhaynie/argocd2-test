@@ -1,0 +1,7 @@
+{
+  "deployment": {
+    "name": "haproxy",
+    "namespace": "haproxy",
+    "path": "components/haproxy/dev"
+  }
+}

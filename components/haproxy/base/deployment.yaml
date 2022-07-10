@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: haproxy
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      deployment: haproxy
+  template:
+    metadata:
+      labels:
+        deployment: haproxy
+    spec:
+      affinity:
+        # HAProxy pods should run in different availability zones
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                  - key: app
+                    operator: In
+                    values:
+                      - haproxy
+              topologyKey: "topology.kubernetes.io/zone"
+      volumes:
+        - name: haproxy-config
+          configMap:
+            name: haproxy-config
+            items:
+              - key: haproxy.cfg
+                path: haproxy.cfg
+      containers:
+        - name: haproxy
+          image: haproxy:alpine
+          ports:
+            - containerPort: 26999
+            - containerPort: 5672
+            - containerPort: 26257
+          envFrom:
+            - configMapRef:
+                name: haproxy-env-configmap
+          volumeMounts:
+            - mountPath: /usr/local/etc/haproxy/haproxy.cfg
+              name: haproxy-config
+              subPath: haproxy.cfg
+              readOnly: true

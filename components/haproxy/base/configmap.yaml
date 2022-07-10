@@ -1,0 +1,88 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: haproxy-config
+data:
+  haproxy.cfg: |
+    global
+      log /dev/log    local0
+      log /dev/log    local1 notice
+      stats socket /var/lib/haproxy/admin.sock mode 660 level admin expose-fd listeners
+      stats timeout 30s
+      daemon
+      maxconn 4096
+
+    defaults
+      log global
+      mode tcp
+      retries 3
+      timeout connect     10s
+      timeout client      1m
+      timeout server      1m
+      option clitcpka
+
+    frontend stats
+      bind *:26999
+      mode http
+      stats enable
+      stats uri /
+
+    frontend cockroach
+      bind *:26257
+      log /dev/log local2 info
+      acl MAIN_not_enough_capacity_cockroach nbsrv(cockroach_local) le 1
+      default_backend cockroach_local
+      use_backend cockroach_remote if MAIN_not_enough_capacity_cockroach
+
+    backend cockroach_local
+      mode tcp
+      balance roundrobin
+      option httpchk GET /health?ready=1
+      server cockroach1 ${SM_COCKROACH_LOCAL_HOSTNAME}:26257 check port 8080
+
+    backend cockroach_remote
+      mode tcp
+      balance roundrobin
+      option httpchk GET /health?ready=1
+      option allbackups
+      server cockroach1 ${SM_COCKROACH_REMOTE1_HOSTNAME}:26257 check port 8080
+      server cockroach2 ${SM_COCKROACH_REMOTE2_HOSTNAME}:26257 check port 8080
+
+    frontend rabbitmq
+      bind *:5672
+      log /dev/log local2 info
+      acl MAIN_not_enough_capacity_rabbit nbsrv(rabbit_local) le 1
+      default_backend rabbit_local
+      use_backend rabbit_remote if MAIN_not_enough_capacity_rabbit
+
+    backend rabbit_local
+      mode tcp
+      balance roundrobin
+      option httpchk GET /
+      server rabbit1 ${SM_RABBIT_MQ_LOCAL_HOSTNAME}:5672 check port 15672
+
+    backend rabbit_remote
+      mode tcp
+      balance roundrobin
+      option httpchk GET /
+      option allbackups
+      server rabbit1 ${SM_RABBIT_MQ_REMOTE_HOSTNAME}:5672 check port 15672
+
+    frontend etcd
+      bind *:2379
+      mode tcp
+      acl MAIN_not_enough_capacity_etcd nbsrv(etcd_local) le 0
+      default_backend etcd_local
+      use_backend etcd_remote if MAIN_not_enough_capacity_etcd
+
+    backend etcd_local
+      mode tcp
+      balance roundrobin
+      server etcd1 ${SM_ETCD_LOCAL_HOSTNAME}:2379 check
+
+    backend etcd_remote
+      mode tcp
+      balance roundrobin
+      option allbackups
+      server etcd1 ${SM_ETCD_REMOTE1_HOSTNAME}:2379 check
+      server etcd2 ${SM_ETCD_REMOTE2_HOSTNAME}:2379 check
