@@ -6,6 +6,7 @@ helmCharts:
   - name: minio
     repo: https://charts.min.io/
     releaseName: minio
+    namespace: platform
     valuesInline:
       mode: standalone
       rootUser: minioroot

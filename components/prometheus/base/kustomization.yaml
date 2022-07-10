@@ -5,3 +5,4 @@ helmCharts:
   - name: prometheus
     repo: https://prometheus-community.github.io/helm-charts
     releaseName: prometheus
+    namespace: platform

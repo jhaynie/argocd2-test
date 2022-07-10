@@ -6,6 +6,7 @@ helmCharts:
   - name: etcd
     repo: https://charts.bitnami.com/bitnami
     releaseName: etcd
+    namespace: platform
     valuesInline:
       autoCompactionMode: periodic
       replicaCount: 1
