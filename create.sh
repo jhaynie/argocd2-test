@@ -12,7 +12,7 @@ fi
 
 
 # make sure we have argocd installed
-if ! command -v argocdx &> /dev/null
+if ! command -v argocd &> /dev/null
 then
 	printf '\e[1;33m'
 	echo "┌────────────────────────────────────────────┐"
