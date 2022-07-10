@@ -2,6 +2,6 @@
   "deployment": {
     "name": "rabbitmq",
     "namespace": "rabbitmq-system",
-    "path": "components/rabbitmq/config"
+    "path": "components/rabbitmq/dev"
   }
 }

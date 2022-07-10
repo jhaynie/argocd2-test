@@ -1,7 +1,0 @@
-{
-  "deployment": {
-    "name": "helloworld",
-    "namespace": "helloworld",
-    "path": "components/helloworld/config"
-  }
-}

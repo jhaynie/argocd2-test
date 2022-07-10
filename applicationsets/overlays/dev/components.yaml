@@ -10,7 +10,7 @@ spec:
               repoURL: https://github.com/jhaynie/argocd2-test.git
               revision: HEAD
               files:
-                - path: components/**/config.json
+                - path: components/**/dev.json
           - list:
               elements:
                 - url: https://kubernetes.default.svc
