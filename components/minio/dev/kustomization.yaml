@@ -9,8 +9,8 @@ helmCharts:
     namespace: minio
     valuesInline:
       mode: standalone
-      rootUser: miniouser
-      rootPassword: miniouser
+      rootUser: minioroot
+      rootPassword: minioroot
       replicas: 1
       persistence:
         size: 1Gi
