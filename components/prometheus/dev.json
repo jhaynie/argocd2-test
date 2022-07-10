@@ -1,0 +1,7 @@
+{
+  "deployment": {
+    "name": "prometheus",
+    "namespace": "prometheus",
+    "path": "components/prometheus/dev"
+  }
+}
