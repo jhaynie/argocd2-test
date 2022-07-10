@@ -1,7 +1,7 @@
 {
   "deployment": {
     "name": "redis",
-    "namespace": "redis",
+    "namespace": "platform",
     "path": "components/redis/dev"
   }
 }
