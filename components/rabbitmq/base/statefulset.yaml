@@ -1,0 +1,64 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: rabbitmq
+spec:
+  serviceName: "rabbitmq"
+  replicas: 3
+  selector:
+    matchLabels:
+      app: rabbitmq
+  template:
+    metadata:
+      labels:
+        app: rabbitmq
+    spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: app
+                      operator: In
+                      values:
+                        - rabbitmq
+                topologyKey: kubernetes.io/hostname
+      volumes:
+        - name: rabbitmq-config
+          configMap:
+            name: rabbitmq-config
+            items:
+              - key: rabbitmq.conf
+                path: rabbitmq.conf
+        - name: rabbitmq-config-definitions
+          configMap:
+            name: rabbitmq-config-definitions
+            items:
+              - key: definitions.json
+                path: definitions.json
+      containers:
+        - name: rabbitmq
+          image: rabbitmq:3-management-alpine
+          ports:
+            - containerPort: 5672
+              name: amqp
+            - containerPort: 15672
+              name: management
+          readinessProbe:
+            httpGet:
+              path: "/"
+              port: management
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            failureThreshold: 2
+          volumeMounts:
+            - mountPath: /etc/rabbitmq/rabbitmq.conf
+              name: rabbitmq-config
+              subPath: rabbitmq.conf
+              readOnly: true
+            - mountPath: /etc/rabbitmq/definitions.json
+              name: rabbitmq-config-definitions
+              subPath: definitions.json
+              readOnly: true
