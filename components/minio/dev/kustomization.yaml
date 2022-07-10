@@ -2,14 +2,22 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
   - ../base
-  - ./tenant-user.yaml
-namespace: tenant-tiny
-patchesStrategicMerge:
-  - tenant.yaml
-patchesJson6902:
-  - target:
-      group: minio.min.io
-      version: v2
-      kind: Tenant
-      name: storage
-    path: tenantNamePatch.yaml
+helmCharts:
+  - name: minio
+    repo: https://charts.min.io/
+    releaseName: minio
+    namespace: minio
+    valuesInline:
+      mode: standalone
+      rootUser: miniouser
+      rootPassword: miniouser
+      replicas: 1
+      persistence:
+        size: 1Gi
+      resources:
+        requests:
+          memory: 1Gi
+      users:
+        - accessKey: miniouser
+          secretKey: miniouser
+          policy: consoleAdmin
